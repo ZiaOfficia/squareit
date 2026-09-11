@@ -210,6 +210,9 @@ export function getRelatedPosts(slug: string, limit = 3): Post[] {
   if (!current) return posts.slice(0, limit);
   return posts
     .filter((post) => post.slug !== slug)
-    .sort((a, b) => (a.category === current.category ? -1 : 1))
+    .sort(
+      (a, b) =>
+        Number(b.category === current.category) - Number(a.category === current.category),
+    )
     .slice(0, limit);
 }

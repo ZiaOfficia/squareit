@@ -10,7 +10,8 @@ export const siteConfig = {
   shortName: "Squareit",
   tagline: "Digital Growth Simplified",
   // Staging deploys set NEXT_PUBLIC_SITE_URL so canonicals never point at prod.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://squareit.in",
+  // `||` (not `??`) so an empty env var still falls back instead of crashing `new URL("")`.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://squareit.in").replace(/\/+$/, ""),
   locale: "en_IN",
   foundingDate: "2016",
 
