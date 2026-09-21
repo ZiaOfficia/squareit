@@ -1,21 +1,5 @@
 import type { NextConfig } from "next";
 
-// TEMPORARILY DISABLED — only the homepage is live, so these sections (and
-// everything under them) redirect home instead of 404ing. Temporary (307) so
-// browsers don't cache it; delete this list when the pages are restored.
-const disabledSections = [
-  "/about",
-  "/services",
-  "/portfolio",
-  "/case-studies",
-  "/blog",
-  "/career",
-  "/contact",
-  "/privacy-policy",
-  "/terms-and-conditions",
-  "/refund-policy",
-];
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -57,12 +41,6 @@ const nextConfig: NextConfig = {
       { source: "/about-us", destination: "/about", permanent: true },
       { source: "/blogs", destination: "/blog", permanent: true },
       { source: "/blogs/:slug", destination: "/blog/:slug", permanent: true },
-
-      ...disabledSections.map((section) => ({
-        source: `${section}/:path*`,
-        destination: "/",
-        permanent: false,
-      })),
     ];
   },
 };
