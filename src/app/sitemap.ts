@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/site";
 // TEMPORARILY DISABLED — only the homepage is live for now. Restore with the pages.
-// import { serviceCategories } from "@/content/services";
+import { serviceCategories } from "@/content/services";
 // import { caseStudies, projects } from "@/content/work";
 // import { postCategories, posts } from "@/content/blog";
 // import { openings } from "@/content/company";
@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // { url: absoluteUrl("/about"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     // { url: absoluteUrl("/about/vision-mission"), lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     // { url: absoluteUrl("/about/team"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    // { url: absoluteUrl("/services"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/services"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // { url: absoluteUrl("/portfolio"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     // { url: absoluteUrl("/case-studies"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     // { url: absoluteUrl("/blog"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
@@ -30,12 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // { url: absoluteUrl("/refund-policy"), lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  // const serviceRoutes: MetadataRoute.Sitemap = serviceCategories.map((category) => ({
-  //   url: absoluteUrl(`/services/${category.slug}`),
-  //   lastModified: now,
-  //   changeFrequency: "monthly",
-  //   priority: 0.85,
-  // }));
+  const serviceRoutes: MetadataRoute.Sitemap = serviceCategories.map((category) => ({
+    url: absoluteUrl(`/services/${category.slug}`),
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.85,
+  }));
 
   // const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
   //   url: absoluteUrl(`/portfolio/${project.slug}`),
@@ -74,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
-    // ...serviceRoutes,
+    ...serviceRoutes,
     // ...projectRoutes,
     // ...caseStudyRoutes,
     // ...postRoutes,
