@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect x="0" y="0" width="14.5" height="14.5" rx="1.5" fill="#0f8a48"/>
-  <rect x="17.5" y="0" width="14.5" height="14.5" rx="1.5" fill="#e0322a"/>
-  <rect x="0" y="17.5" width="14.5" height="14.5" rx="1.5" fill="#1553cc"/>
-  <rect x="17.5" y="17.5" width="14.5" height="14.5" rx="1.5" fill="#ffc933"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.2 185.8" width="206" height="186">
+  <!-- Four interlocking rings: one outline, reflected into each quadrant.
+       Keep in sync with src/lib/logo.ts. -->
+  <path d="M0 0 H100 V100 H55 V86.2 H86.2 V13.8 H13.8 V56.5 H0 Z" transform="translate(0 0)" fill="#069f45"/>
+  <path d="M0 0 H100 V100 H55 V86.2 H86.2 V13.8 H13.8 V56.5 H0 Z" transform="translate(206.2 0) scale(-1 1)" fill="#f12f27"/>
+  <path d="M0 0 H100 V100 H55 V86.2 H86.2 V13.8 H13.8 V56.5 H0 Z" transform="translate(100 185.8) scale(-1 -1)" fill="#0f77fc"/>
+  <path d="M0 0 H100 V100 H55 V86.2 H86.2 V13.8 H13.8 V56.5 H0 Z" transform="translate(106.2 185.8) scale(1 -1)" fill="#fcc002"/>
 </svg>

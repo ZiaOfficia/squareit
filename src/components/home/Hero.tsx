@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container, HandNote } from "@/components/ui/Section";
 import { ArrowUpRight, PlayIcon } from "@/components/ui/Icons";
+import { HeroBackdrop } from "@/components/home/hero/HeroBackdrop";
+import { HeroMark } from "@/components/home/hero/HeroMark";
 
 const disciplines = ["Strategy", "Marketing", "Technology", "Creative"];
 
@@ -32,9 +33,9 @@ function AvatarStack() {
 }
 
 /**
- * The hero collage: overlapping brand-coloured panels with a portrait sitting
- * across them. Built from layout primitives rather than one flat image so it
- * stays crisp, themeable and fast on mobile.
+ * The hero collage: overlapping brand-coloured panels with the Squareit mark
+ * turning in 3D across them. Built from layout primitives rather than one flat
+ * image so it stays crisp, themeable and fast on mobile.
  */
 function HeroCollage() {
   return (
@@ -55,36 +56,9 @@ function HeroCollage() {
         <path d="M0 100 L100 100 L0 10 Z" fill="currentColor" />
       </svg>
 
-      {/* Growth-chart motif sitting on the red panel */}
-      <svg
-        viewBox="0 0 120 90"
-        className="absolute left-[37%] top-[8%] h-[22%] w-[24%] text-white"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M10 78h100" />
-        <rect x="22" y="52" width="16" height="26" rx="2" />
-        <rect x="48" y="38" width="16" height="40" rx="2" />
-        <rect x="74" y="22" width="16" height="56" rx="2" />
-        <path d="M18 40 44 24 68 32 104 8" />
-        <path d="M92 8h12v12" />
-      </svg>
-
-      {/* Portrait — replace hero-portrait.png with the real cut-out. */}
-      <div className="absolute inset-x-[18%] bottom-0 top-[10%]">
-        <Image
-          src="/images/hero-portrait.png"
-          alt="Digital marketing strategist at Squareit Solutions"
-          fill
-          priority
-          sizes="(max-width: 768px) 70vw, 36vw"
-          className="object-contain object-bottom grayscale"
-        />
-      </div>
+      {/* Focal object — the logo mark as real geometry, sitting across the
+          panels where the portrait placeholder used to be. */}
+      <HeroMark />
     </div>
   );
 }
@@ -92,7 +66,9 @@ function HeroCollage() {
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-paper pb-14 pt-8 md:pb-20 md:pt-10">
-      <Container>
+      <HeroBackdrop />
+
+      <Container className="relative z-10">
         <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-6">
           {/* ---------- Copy column ---------- */}
           <div className="lg:col-span-5 lg:pt-6">
