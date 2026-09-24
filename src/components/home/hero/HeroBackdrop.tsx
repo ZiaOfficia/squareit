@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-import { useSceneReady } from "./useSceneReady";
+import { useSceneReady } from "@/components/webgl/useSceneReady";
 
 /**
  * Client shell for the hero's WebGL layer.

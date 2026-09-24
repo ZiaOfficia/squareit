@@ -13,6 +13,7 @@
   "dependencies": {
     "@react-three/drei": "^10.7.8",
     "@react-three/fiber": "^9.8.0",
+    "motion": "^13.4.2",
     "next": "15.5.25",
     "react": "19.1.1",
     "react-dom": "19.1.1",

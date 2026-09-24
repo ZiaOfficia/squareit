@@ -1,7 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink, ArrowBadge } from "@/components/ui/Button";
 import { Container, Eyebrow, HandNote } from "@/components/ui/Section";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { featuredProjects } from "@/content/work";
 
 export function FeaturedWork() {
@@ -10,7 +12,7 @@ export function FeaturedWork() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Intro */}
-          <div className="lg:col-span-3">
+          <Reveal className="lg:col-span-3">
             <Eyebrow>Featured Work</Eyebrow>
             <h2 className="mt-5 text-display-md">Work that makes an impact.</h2>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
@@ -20,40 +22,39 @@ export function FeaturedWork() {
             <ButtonLink href="/portfolio" variant="outline" size="md" className="mt-7">
               View Our Portfolio
             </ButtonLink>
-          </div>
+          </Reveal>
 
           {/* Project cards */}
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
             {featuredProjects.map((project) => (
-              <Link key={project.slug} href={`/portfolio/${project.slug}`} className="group block">
-                <div
-                  className="relative aspect-[4/3] overflow-hidden rounded-sm"
-                  style={{ backgroundColor: project.tone }}
-                >
-                  <Image
-                    src={project.image}
-                    alt={`${project.client} — ${project.discipline} project by Squareit Solutions`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 24vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </div>
+              <StaggerItem key={project.slug}>
+                <TiltCard strength={4}>
+                  <Link href={`/portfolio/${project.slug}`} className="group block">
+                    <ParallaxImage
+                      src={project.image}
+                      alt={`${project.client} — ${project.discipline} project by Squareit Solutions`}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 24vw"
+                      className="aspect-[4/3] rounded-sm"
+                      background={project.tone}
+                    />
 
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
-                      {project.client}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted">{project.discipline}</p>
-                  </div>
-                  <ArrowBadge tone="light" className="size-8" />
-                </div>
-              </Link>
+                    <div className="mt-4 flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
+                          {project.client}
+                        </h3>
+                        <p className="mt-1 text-xs text-muted">{project.discipline}</p>
+                      </div>
+                      <ArrowBadge tone="light" className="size-8" />
+                    </div>
+                  </Link>
+                </TiltCard>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           {/* Handwritten note */}
-          <div className="hidden lg:col-span-1 lg:flex lg:items-center">
+          <Reveal delay={0.25} className="hidden lg:col-span-1 lg:flex lg:items-center">
             <div className="-rotate-6 text-ink">
               <HandNote className="text-[1.55rem]" underline>
                 Real
@@ -65,7 +66,7 @@ export function FeaturedWork() {
                 Growth.
               </HandNote>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

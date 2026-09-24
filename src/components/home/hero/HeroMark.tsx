@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 import { LogoMark } from "@/components/ui/LogoMark";
-import { useSceneReady } from "./useSceneReady";
+import { useSceneReady } from "@/components/webgl/useSceneReady";
 
 /**
  * Client shell for the collage's focal object.

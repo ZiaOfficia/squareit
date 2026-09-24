@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -101,12 +102,21 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${archivo.variable} ${jakarta.variable} ${caveat.variable}`}>
       <body className="min-h-screen antialiased">
+        {/* Scroll reveals are server-rendered in their hidden state, so without
+            scripting they would never play and the content would stay
+            invisible. This puts every revealed element back at rest. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+
         {/* Site-wide structured data: one @graph, emitted once. */}
         <JsonLd schema={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
 
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </MotionProvider>
 
         {gaMeasurementId ? (
           <>

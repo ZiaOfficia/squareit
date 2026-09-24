@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/ui/Section";
 import { ArrowRight } from "@/components/ui/Icons";
+import { DrawRail } from "@/components/motion/DrawRail";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { processSteps } from "@/content/company";
 
 const badgeTones = {
@@ -13,9 +15,9 @@ const badgeTones = {
 
 export function ProcessPanel() {
   return (
-    <div className="bg-paper px-6 py-14 md:px-10 lg:px-14 lg:py-20">
+    <div className="bg-paper-alt px-6 py-14 md:px-10 lg:px-14 lg:py-20">
       <div className="grid gap-10 md:grid-cols-2 md:gap-8">
-        <div>
+        <Reveal>
           <Eyebrow>Our Process</Eyebrow>
           <h2 className="mt-5 text-display-md">From idea to impact.</h2>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
@@ -28,16 +30,13 @@ export function ProcessPanel() {
             See How We Work
             <ArrowRight className="size-4" />
           </Link>
-        </div>
+        </Reveal>
 
-        <ol className="relative space-y-7">
-          {/* Connecting rail behind the numbered badges */}
-          <span
-            className="absolute left-[1.35rem] top-3 bottom-3 w-px bg-line"
-            aria-hidden="true"
-          />
+        <Stagger as="ol" className="relative space-y-7">
+          {/* Connecting rail behind the numbered badges, drawn on arrival */}
+          <DrawRail className="absolute left-[1.35rem] top-3 bottom-3 w-px bg-line" />
           {processSteps.map((step) => (
-            <li key={step.number} className="relative flex gap-4">
+            <StaggerItem key={step.number} as="li" className="relative flex gap-4">
               <span
                 className={`relative z-10 inline-flex size-11 shrink-0 items-center justify-center rounded-full font-display text-[0.8rem] font-extrabold text-white ${
                   badgeTones[step.accent]
@@ -53,9 +52,9 @@ export function ProcessPanel() {
                   {step.description}
                 </p>
               </div>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </Stagger>
       </div>
     </div>
   );

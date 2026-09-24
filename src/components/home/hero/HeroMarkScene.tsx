@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { ExtrudeGeometry, MathUtils, NoToneMapping, Shape, type Group, type Mesh } from "three";
 
 import { LOGO_QUADRANTS, quadrantShape, type LogoQuadrant } from "@/lib/logo";
-import { usePointer } from "./usePointer";
+import { usePointer } from "@/components/webgl/usePointer";
 
 /**
  * The hero's focal object: the Squareit mark built as real geometry.
