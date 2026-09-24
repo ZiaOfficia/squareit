@@ -7,6 +7,7 @@ import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { TestimonialSlider } from "@/components/home/TestimonialSlider";
 import { ProcessSplit } from "@/components/home/ProcessPanel";
 import { InsightsSection } from "@/components/home/InsightsSection";
+import { FaqSection } from "@/components/home/FaqSection";
 import { TrustedBy } from "@/components/home/TrustedBy";
 import { CtaBand } from "@/components/home/CtaBand";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -22,17 +23,23 @@ export const metadata: Metadata = buildMetadata({
   absoluteTitle: true,
 });
 
+/** Kept in one place: the schema below and the section must show the same set. */
+const HOME_FAQ_COUNT = 4;
+
 export default function HomePage() {
   return (
     <>
-      <JsonLd schema={faqSchema(faqs.slice(0, 4))} />
+      <JsonLd schema={faqSchema(faqs.slice(0, HOME_FAQ_COUNT))} />
 
+      {/* Value runs paper → ink → paper → forest → white → blue down the page,
+          so each band lands against a different one and the eye keeps moving. */}
       <Hero />
       <StatsBar />
       <ServicesSection />
       <FeaturedWork />
       <ProcessSplit left={<TestimonialSlider />} />
       <InsightsSection />
+      <FaqSection count={HOME_FAQ_COUNT} />
       <TrustedBy />
       <CtaBand />
     </>

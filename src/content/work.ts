@@ -23,8 +23,8 @@ export const projects: Project[] = [
     year: "2024",
     summary:
       "A dark, editorial portfolio site for a creative studio — built to make the work the hero and the enquiry form impossible to miss.",
-    image: "/images/work/studio-and-studio.jpg",
-    tone: "#141414",
+    image: "/images/work/studio-and-studio.png",
+    tone: "#F5DFD9",
     featured: true,
   },
   {
@@ -36,8 +36,8 @@ export const projects: Project[] = [
     year: "2024",
     summary:
       "Local SEO, Google Business Profile and paid search working together to keep a dental practice's appointment book full.",
-    image: "/images/work/aastha-dental.jpg",
-    tone: "#E8F0FA",
+    image: "/images/work/aastha-dental.png",
+    tone: "#DBE1EC",
     featured: true,
   },
   {
@@ -49,8 +49,8 @@ export const projects: Project[] = [
     year: "2023",
     summary:
       "Identity, packaging and collateral for a children's art brand — warm, tactile and built to scale across products.",
-    image: "/images/work/artchilds.jpg",
-    tone: "#FBE3E6",
+    image: "/images/work/artchilds.png",
+    tone: "#F9F1DA",
     featured: true,
   },
   {
@@ -61,8 +61,8 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2023",
     summary: "Campaign creative and social templates for a fine jewellery retailer.",
-    image: "/images/work/jewelsbox.jpg",
-    tone: "#F4EDE2",
+    image: "/images/work/jewelsbox.png",
+    tone: "#DDE0D9",
     featured: false,
   },
   {
@@ -73,8 +73,8 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2023",
     summary: "Menu, in-store and social design for a growing QSR chain.",
-    image: "/images/work/pizza-dine.jpg",
-    tone: "#FFF1DC",
+    image: "/images/work/pizza-dine.png",
+    tone: "#F5DFD9",
     featured: false,
   },
   {
@@ -85,8 +85,8 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2022",
     summary: "Brand and campaign design for a destination wedding planner.",
-    image: "/images/work/worldwide-wedding.jpg",
-    tone: "#EFE9F7",
+    image: "/images/work/worldwide-wedding.png",
+    tone: "#DBE8DB",
     featured: false,
   },
 ];
@@ -135,8 +135,8 @@ export const caseStudies: CaseStudy[] = [
       { label: "Map pack keywords", value: "42" },
       { label: "Cost per enquiry", value: "−54%" },
     ],
-    image: "/images/work/aastha-dental.jpg",
-    tone: "#E8F0FA",
+    image: "/images/work/aastha-dental.png",
+    tone: "#DBE1EC",
   },
   {
     slug: "studio-and-studio-rebuild",
@@ -160,8 +160,8 @@ export const caseStudies: CaseStudy[] = [
       { label: "LCP (mobile)", value: "1.4s" },
       { label: "Enquiries per month", value: "2.4×" },
     ],
-    image: "/images/work/studio-and-studio.jpg",
-    tone: "#141414",
+    image: "/images/work/studio-and-studio.png",
+    tone: "#F5DFD9",
   },
   {
     slug: "artchilds-brand-launch",
@@ -185,8 +185,8 @@ export const caseStudies: CaseStudy[] = [
       { label: "Return customers", value: "31%" },
       { label: "Social reach", value: "1.2M" },
     ],
-    image: "/images/work/artchilds.jpg",
-    tone: "#FBE3E6",
+    image: "/images/work/artchilds.png",
+    tone: "#F9F1DA",
   },
 ];
 

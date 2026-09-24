@@ -42,8 +42,8 @@ export const posts: Post[] = [
     authorRole: "Search Team",
     publishedAt: "2024-03-12",
     readingMinutes: 10,
-    image: "/images/blog/google-rankings.jpg",
-    tone: "#E9EEF6",
+    image: "/images/blog/google-rankings.png",
+    tone: "#DEEADE",
     featured: true,
     body: `## Start with what Google can actually read
 
@@ -72,8 +72,8 @@ Impressions and average position tell you whether you are visible. Clicks, assis
     authorRole: "Social Team",
     publishedAt: "2024-02-28",
     readingMinutes: 6,
-    image: "/images/blog/social-media.jpg",
-    tone: "#F2EAF7",
+    image: "/images/blog/social-media.png",
+    tone: "#F5E0DA",
     featured: true,
     body: `## 1. Pick two channels, not six
 
@@ -106,8 +106,8 @@ One recorded conversation becomes a reel, three quote cards, a carousel and a ne
     authorRole: "Engineering Team",
     publishedAt: "2024-02-14",
     readingMinutes: 6,
-    image: "/images/blog/fast-website.jpg",
-    tone: "#101820",
+    image: "/images/blog/fast-website.png",
+    tone: "#DDE2EC",
     featured: true,
     body: `## Every second has a price
 
@@ -134,8 +134,8 @@ Server rendering, modern image formats, a sensible font loading strategy and shi
     authorRole: "Paid Media Team",
     publishedAt: "2024-01-30",
     readingMinutes: 7,
-    image: "/images/blog/google-ads.jpg",
-    tone: "#FFF3DA",
+    image: "/images/blog/google-ads.png",
+    tone: "#F9F1DB",
     featured: false,
     body: `## Work backwards from revenue
 
@@ -156,8 +156,8 @@ The first six to eight weeks buy you data, not profit. Budget for the learning p
     authorRole: "Design Team",
     publishedAt: "2024-01-16",
     readingMinutes: 8,
-    image: "/images/blog/brand-identity.jpg",
-    tone: "#E6F3EC",
+    image: "/images/blog/brand-identity.png",
+    tone: "#DEE1DA",
     featured: false,
     body: `## The minimum viable identity system
 
@@ -178,8 +178,8 @@ Brands break at scale when every new person has to guess. Written rules keep the
     authorRole: "Search Team",
     publishedAt: "2023-12-20",
     readingMinutes: 9,
-    image: "/images/blog/local-seo.jpg",
-    tone: "#EAF1EC",
+    image: "/images/blog/local-seo.png",
+    tone: "#DEEADD",
     featured: false,
     body: `## Your Google Business Profile is your homepage
 
