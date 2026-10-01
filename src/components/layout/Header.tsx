@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
-import { ButtonLink } from "@/components/ui/Button";
+import { AuditDialog } from "@/components/contact/AuditDialog";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { ChevronDown, CloseIcon, MenuIcon, PhoneIcon } from "@/components/ui/Icons";
 import { mainNav } from "@/lib/navigation";
 import { siteConfig } from "@/lib/site";
@@ -14,6 +15,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [auditOpen, setAuditOpen] = useState(false);
 
   // Close the mobile sheet on navigation so the menu never lingers.
   useEffect(() => {
@@ -28,13 +30,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll behind the mobile sheet.
+  // Lock body scroll behind the mobile sheet and the audit dialog.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open || auditOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [open, auditOpen]);
+
+  const openAudit = () => {
+    setOpen(false);
+    setAuditOpen(true);
+  };
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -52,11 +59,11 @@ export function Header() {
         Skip to content
       </a>
 
-      <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
+      <div className="container-page flex h-[4.5rem] items-center justify-between gap-3 sm:gap-6">
         <Logo />
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 xl:flex">
           {mainNav.map((item) => (
             <div
               key={item.href}
@@ -104,18 +111,35 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <a
             href={`tel:${siteConfig.contact.phonePrimaryHref}`}
-            className="hidden items-center gap-2 text-sm font-semibold text-ink xl:inline-flex"
+            className="hidden items-center gap-2 text-sm font-semibold text-ink 2xl:inline-flex"
           >
             <PhoneIcon className="size-4 text-muted" />
             {siteConfig.contact.phonePrimary}
           </a>
 
-          <ButtonLink href="/contact" variant="yellow" size="md" className="hidden sm:inline-flex">
+          <ButtonLink
+            href="/contact"
+            variant="outline"
+            size="md"
+            withArrow={false}
+            className="whitespace-nowrap max-md:hidden"
+          >
             Get a Proposal
           </ButtonLink>
+
+          <Button
+            type="button"
+            variant="yellow"
+            size="md"
+            withArrow
+            onClick={openAudit}
+            className="whitespace-nowrap max-sm:hidden"
+          >
+            Get Free Audit
+          </Button>
 
           <button
             type="button"
@@ -123,18 +147,19 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex size-10 items-center justify-center rounded-sm border border-line text-ink lg:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-sm border border-line text-ink xl:hidden"
           >
             {open ? <CloseIcon className="size-5" /> : <MenuIcon className="size-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile sheet */}
+      {/* Mobile sheet — positioned against the header, not the viewport: the
+          scrolled header's backdrop-filter would otherwise trap a fixed child. */}
       {open ? (
         <div
           id="mobile-nav"
-          className="fixed inset-0 top-[4.5rem] z-40 overflow-y-auto bg-paper lg:hidden"
+          className="absolute inset-x-0 top-full z-40 h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain bg-paper xl:hidden"
         >
           <nav aria-label="Mobile" className="container-page py-6">
             <ul className="divide-y divide-line">
@@ -182,7 +207,10 @@ export function Header() {
             </ul>
 
             <div className="mt-8 space-y-3">
-              <ButtonLink href="/contact" variant="yellow" className="w-full">
+              <Button type="button" variant="yellow" withArrow onClick={openAudit} className="w-full">
+                Get Free Audit
+              </Button>
+              <ButtonLink href="/contact" variant="outline" className="w-full">
                 Get a Proposal
               </ButtonLink>
               <a
@@ -196,6 +224,8 @@ export function Header() {
           </nav>
         </div>
       ) : null}
+
+      <AuditDialog open={auditOpen} onClose={() => setAuditOpen(false)} />
     </header>
   );
 }

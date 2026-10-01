@@ -24,7 +24,7 @@ function LogoContent({ tone = "dark" }: { tone?: "dark" | "light" }) {
           squareit
         </span>
         <span
-          className={`mt-[3px] text-[0.5rem] font-semibold uppercase tracking-[0.14em] ${
+          className={`mt-[3px] whitespace-nowrap text-[0.5rem] font-semibold uppercase tracking-[0.14em] max-[420px]:hidden ${
             tone === "light" ? "text-white/60" : "text-muted"
           }`}
         >
