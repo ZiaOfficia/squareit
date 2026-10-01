@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+
+import { gsap, prefersReducedMotion, useGSAP } from "./gsap";
 
 /**
  * An image that drifts slightly slower than the page as it passes.
@@ -29,14 +30,25 @@ export function ParallaxImage({
   travel?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const still = useReducedMotion();
+  const layer = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
 
-  const y = useTransform(scrollYProgress, [0, 1], [travel, -travel]);
+      gsap.fromTo(
+        layer.current,
+        { y: travel },
+        {
+          y: -travel,
+          ease: "none",
+          // Scrubbed across the frame's whole pass through the viewport.
+          scrollTrigger: { trigger: ref.current, start: "top bottom", end: "bottom top", scrub: true },
+        },
+      );
+    },
+    { dependencies: [travel], scope: ref, revertOnUpdate: true },
+  );
 
   return (
     <div
@@ -44,10 +56,10 @@ export function ParallaxImage({
       className={`relative overflow-hidden ${className}`}
       style={background ? { backgroundColor: background } : undefined}
     >
-      <m.div
+      <div
+        ref={layer}
         // Overscaled so the drift stays inside the frame at both extremes.
         className="absolute -inset-y-[8%] inset-x-0"
-        style={still ? undefined : { y }}
       >
         <Image
           src={src}
@@ -56,7 +68,7 @@ export function ParallaxImage({
           sizes={sizes}
           className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
-      </m.div>
+      </div>
     </div>
   );
 }

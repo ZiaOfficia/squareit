@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Section } from "@/components/ui/Section";
 import { ArrowBadge } from "@/components/ui/Button";
@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { postCategories, posts } from "@/content/blog";
 import { absoluteUrl } from "@/lib/site";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Blog — Digital Marketing Insights & Guides",
@@ -54,6 +55,7 @@ export default function BlogPage() {
         }
         description="Tips, trends and strategies for businesses that want to grow — written by the people running the campaigns."
         crumbs={[{ name: "Blog", path: "/blog" }]}
+        accent="green"
       >
         <ul className="mt-8 flex flex-wrap gap-2">
           {postCategories.map((category) => (
@@ -72,21 +74,15 @@ export default function BlogPage() {
       {/* Lead article */}
       <Section tone="paper" padding="md">
         <Container>
-          <article>
+          <Reveal as="article">
             <Link href={`/blog/${lead.slug}`} className="group grid gap-8 lg:grid-cols-12">
-              <div
-                className="relative aspect-[16/9] overflow-hidden rounded-sm lg:col-span-7"
-                style={{ backgroundColor: lead.tone }}
-              >
-                <Image
-                  src={lead.image}
-                  alt={lead.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 55vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
+              <ParallaxImage
+                      src={lead.image}
+                      alt={lead.title}
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      className="aspect-[16/9] lg:col-span-7 rounded-sm"
+                      background={lead.tone}
+                    />
               <div className="flex flex-col justify-center lg:col-span-5">
                 <div className="flex items-center gap-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em]">
                   <span className="text-brand-green">{lead.categoryName}</span>
@@ -101,30 +97,25 @@ export default function BlogPage() {
                 </p>
               </div>
             </Link>
-          </article>
+          </Reveal>
         </Container>
       </Section>
 
       {/* Grid */}
       <Section tone="paper" padding="sm">
         <Container>
-          <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger as="ul" className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((post) => (
-              <li key={post.slug}>
+              <StaggerItem as="li" key={post.slug}>
                 <article className="group">
                   <Link href={`/blog/${post.slug}`}>
-                    <div
-                      className="relative aspect-[16/10] overflow-hidden rounded-sm"
-                      style={{ backgroundColor: post.tone }}
-                    >
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </div>
+                    <ParallaxImage
+                      src={post.image}
+                      alt={post.title}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
+                      className="aspect-[16/10] rounded-sm"
+                      background={post.tone}
+                    />
                     <div className="mt-4 flex items-center gap-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em]">
                       <span className="text-brand-green">{post.categoryName}</span>
                       <span className="text-muted">{post.readingMinutes} min read</span>
@@ -139,9 +130,9 @@ export default function BlogPage() {
                     <p className="mt-4 text-xs text-muted">{formatDate(post.publishedAt)}</p>
                   </Link>
                 </article>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 

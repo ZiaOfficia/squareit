@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { openings } from "@/content/company";
 import { siteConfig } from "@/lib/site";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Careers at Squareit Solutions — Jobs in Lucknow",
@@ -41,6 +42,7 @@ export default function CareerPage() {
         }
         description="We are a small team that ships a lot. If you would rather own an outcome than sit in a process, you will like it here."
         crumbs={[{ name: "Career", path: "/career" }]}
+        accent="red"
         note={
           <>
             Come
@@ -58,9 +60,9 @@ export default function CareerPage() {
           <Eyebrow>Open Roles</Eyebrow>
           <h2 className="mt-4 text-display-md">{openings.length} positions open.</h2>
 
-          <ul className="mt-10 divide-y divide-line border-y border-line">
+          <Stagger as="ul" className="mt-10 divide-y divide-line border-y border-line">
             {openings.map((opening) => (
-              <li key={opening.slug}>
+              <StaggerItem as="li" key={opening.slug}>
                 <Link
                   href={`/career/${opening.slug}`}
                   className="group flex flex-col gap-4 py-7 transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-8"
@@ -86,9 +88,9 @@ export default function CareerPage() {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
 
           <p className="mt-8 text-sm text-muted">
             Nothing that fits?{" "}

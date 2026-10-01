@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { getProject, projects } from "@/content/work";
 import { absoluteUrl } from "@/lib/site";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 type Params = { slug: string };
 
@@ -71,6 +72,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       />
 
       <PageHeader
+        accent="blue"
         eyebrow={project.discipline}
         title={project.title}
         description={project.summary}
@@ -97,19 +99,13 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       <Section tone="paper" padding="md">
         <Container>
-          <div
-            className="relative aspect-[16/9] overflow-hidden rounded-sm"
-            style={{ backgroundColor: project.tone }}
-          >
-            <Image
-              src={project.image}
-              alt={`${project.client} project preview`}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
+          <ParallaxImage
+                      src={project.image}
+                      alt={`${project.client} project preview`}
+                      sizes="100vw"
+                      className="aspect-[16/9] rounded-sm"
+                      background={project.tone}
+                    />
 
           <div className="mx-auto mt-12 max-w-2xl space-y-5 text-[0.95rem] leading-relaxed text-ink-soft">
             <p>{project.summary}</p>
@@ -132,30 +128,25 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       <Section tone="paper-alt" padding="md">
         <Container>
           <p className="eyebrow">More Work</p>
-          <ul className="mt-6 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger as="ul" className="mt-6 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {more.map((item) => (
-              <li key={item.slug}>
+              <StaggerItem as="li" key={item.slug}>
                 <Link href={`/portfolio/${item.slug}`} className="group block">
-                  <div
-                    className="relative aspect-[4/3] overflow-hidden rounded-sm"
-                    style={{ backgroundColor: item.tone }}
-                  >
-                    <Image
+                  <ParallaxImage
                       src={item.image}
                       alt={`${item.client} project`}
-                      fill
                       sizes="(max-width: 640px) 100vw, 32vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="aspect-[4/3] rounded-sm"
+                      background={item.tone}
                     />
-                  </div>
                   <h2 className="mt-4 font-display text-[0.95rem] font-extrabold tracking-tight">
                     {item.client}
                   </h2>
                   <p className="mt-1 text-xs text-muted">{item.discipline}</p>
                 </Link>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 

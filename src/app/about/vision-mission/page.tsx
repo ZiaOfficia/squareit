@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Eyebrow, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Vision & Mission",
@@ -48,6 +49,7 @@ export default function VisionMissionPage() {
       />
 
       <PageHeader
+        accent="forest"
         eyebrow="Vision & Mission"
         title={
           <>
@@ -92,16 +94,16 @@ export default function VisionMissionPage() {
                 Six promises, in writing.
               </h2>
             </div>
-            <ul className="grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:col-span-8">
+            <Stagger as="ul" className="grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:col-span-8">
               {commitments.map((item, index) => (
-                <li key={item} className="flex gap-4 border-t border-white/15 pt-5">
+                <StaggerItem as="li" key={item} className="flex gap-4 border-t border-white/15 pt-5">
                   <span className="font-display text-sm font-extrabold text-brand-yellow">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <p className="text-sm leading-relaxed text-white/80">{item}</p>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
         </Container>
       </Section>

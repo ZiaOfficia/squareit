@@ -71,6 +71,7 @@ export default async function CareerDetailPage({ params }: { params: Promise<Par
       />
 
       <PageHeader
+        accent="red"
         eyebrow={opening.department}
         title={opening.title}
         description={opening.summary}

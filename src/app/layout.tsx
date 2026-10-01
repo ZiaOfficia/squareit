@@ -5,7 +5,6 @@ import "./globals.css";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MotionProvider } from "@/components/motion/MotionProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -112,11 +111,9 @@ export default function RootLayout({
         {/* Site-wide structured data: one @graph, emitted once. */}
         <JsonLd schema={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
 
-        <MotionProvider>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-        </MotionProvider>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
 
         {gaMeasurementId ? (
           <>

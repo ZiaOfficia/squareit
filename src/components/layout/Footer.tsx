@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { MailIcon, PhoneIcon, PinIcon, socialIcons } from "@/components/ui/Icons";
@@ -15,9 +16,36 @@ export function Footer() {
         {/* Brand */}
         <div className="lg:col-span-4 lg:pr-10">
           <Logo />
+          {/* Company description as published on squareit.in. */}
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            We help businesses grow with strategy, technology, marketing and creative solutions.
+            Squareit Solutions is a digital marketing company aims to provide best digital
+            solutions to their customers. Using real time smart strategies, we attempt to provide
+            the fruitful results in a minimum time lap.
           </p>
+
+          {/* Accreditations carried over from squareit.in. */}
+          <ul className="mt-6 flex flex-wrap items-center gap-3">
+            <li className="flex h-12 items-center rounded-sm border border-line bg-white px-3">
+              <Image
+                src="/images/squareit/misc/google-partner.png"
+                alt="Google Partner"
+                width={96}
+                height={40}
+                sizes="96px"
+                className="h-8 w-auto object-contain"
+              />
+            </li>
+            <li className="flex h-12 items-center rounded-sm border border-line bg-white px-3">
+              <Image
+                src="/images/squareit/misc/iso-certification.webp"
+                alt="ISO certified"
+                width={96}
+                height={40}
+                sizes="96px"
+                className="h-8 w-auto object-contain"
+              />
+            </li>
+          </ul>
         </div>
 
         {/* Main links */}
@@ -117,6 +145,49 @@ export function Footer() {
               );
             })}
           </ul>
+        </div>
+      </div>
+
+      {/* Newsletter — copy as published on squareit.in. */}
+      <div className="border-t border-line bg-paper-alt">
+        <div className="container-page flex flex-col gap-6 py-10 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="font-display text-[1.35rem] font-extrabold tracking-tight">
+              Subscribe to our Newsletter
+            </h2>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
+              Join Our Newsletter &amp; Marketing Communication. We&apos;ll send you news and
+              offers.
+            </p>
+          </div>
+
+          {/* Posts to the mail client until a list backend is connected — a
+              form that silently discards addresses would be worse than none. */}
+          <form
+            action={`mailto:${siteConfig.contact.email}`}
+            method="post"
+            encType="text/plain"
+            className="flex w-full max-w-md gap-2"
+          >
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
+              type="email"
+              name="email"
+              required
+              autoComplete="email"
+              placeholder="you@company.com"
+              className="h-12 min-w-0 flex-1 rounded-sm border border-line bg-white px-4 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-ink"
+            />
+            <button
+              type="submit"
+              className="inline-flex h-12 shrink-0 items-center justify-center rounded-sm bg-ink px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-soft"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </div>
 

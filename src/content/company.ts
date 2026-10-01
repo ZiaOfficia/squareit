@@ -52,44 +52,96 @@ export type Testimonial = {
   name: string;
   role: string;
   company: string;
+  /** Client logo from squareit.in, shown beside the quote. */
+  logo?: string;
   avatar?: string;
 };
 
+/**
+ * Client testimonials, carried over verbatim from squareit.in. The wording is
+ * the clients' own — spelling and phrasing are left as published rather than
+ * tidied, because these are quotations.
+ */
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Squareit helped us build a stronger digital presence and real business growth. Their strategy, creativity and support have been exceptional.",
+      "Squareit Solutions is a fantastic team that have helped us grow our business online through a wide range of digital services including Social Media, PPC, SEO etc. This is the best digital Marketing agency that is very Professional and result oriented.",
     name: "Sarvesh Sonkar",
     role: "Founder",
     company: "SS Coaching",
+    logo: "/images/squareit/clients/client-ss-coaching.jpg",
   },
   {
     quote:
-      "Our appointment book has not looked this healthy in years. They understood our patients before they touched a single campaign.",
-    name: "Dr. Anjali Verma",
-    role: "Clinical Director",
-    company: "Aastha Dental Solution",
+      "It has been an absolute pleasure to work with Squareit Solutions. The guys not only provided creative solutions for our consultancy but also helped us to reach our Target Customers. The best part is transparency and regular reports.",
+    name: "Sahu Developers",
+    role: "Owner",
+    company: "Sahu Developers",
+    logo: "/images/squareit/clients/client-sahu-developers.jpg",
   },
   {
     quote:
-      "The rebuild paid for itself in a quarter. Faster site, clearer story, and enquiries from people who already knew what they wanted.",
-    name: "Rohit Malhotra",
-    role: "Creative Director",
-    company: "Studio & Studio",
+      "No doubt, Squareit Solutions is the Best digital Makreting Company in Lucknow where the Creative team helped us grow our business online through a wide range of digital services including SEO, Youtube Video promotion, Google Adwords etc. under minimal amount.",
+    name: "Helping Hands",
+    role: "Owner",
+    company: "Helping Hands",
+    logo: "/images/squareit/clients/client-helping-hands.jpg",
   },
   {
     quote:
-      "They launched our brand end to end — identity, packaging and storefront — and stayed with us through the messy first months.",
-    name: "Priya Nair",
-    role: "Co-Founder",
-    company: "Artchilds",
+      "Jewels Box ranking has gone up so much from the great work that your team has done and our brand get organic sales consistently from your efforts. We are very much thankful to Squareit Solutions for their result-oriented efforts.",
+    name: "JewelsBox Lucknow",
+    role: "Owner",
+    company: "JewelsBox",
+    logo: "/images/squareit/clients/client-jewelsbox.jpg",
   },
   {
     quote:
-      "Reporting we can actually read, and a team that tells us when something is not working. That honesty is rarer than it should be.",
-    name: "Amit Kanhaiya",
-    role: "Director",
-    company: "Kanhaiya Group",
+      "Extremely Satisfied with Squareit Solutions services. It is best Digital marketing Agency working on our project like their own, very dedicated to client services and we look forward to work with them in future also.",
+    name: "AJ Sons",
+    role: "Owner",
+    company: "AJ Sons",
+    logo: "/images/squareit/clients/client-aj-sons.jpg",
+  },
+  {
+    quote:
+      "Work and response is extremely superb, Staff is cooperative. I am super happy with their services. Keep up the good work!",
+    name: "Xoheb Khan",
+    role: "Owner",
+    company: "Xoheb Khan",
+    logo: "/images/squareit/clients/client-xoheb-khan.jpg",
+  },
+  {
+    quote:
+      "Squareit is a creative company that knows how to get the job done. I would recommend you to check it out if you are looking to grow your business digitally.",
+    name: "Pizza Dine",
+    role: "Owner",
+    company: "Pizza Dine",
+    logo: "/images/squareit/clients/client-pizza-dine.jpg",
+  },
+  {
+    quote:
+      "Outstanding Digital marketing agency!!! I would highly recommend the company to any business who need SEO, content marketing, web design and development, affiliate marketing and much more.",
+    name: "Rishita Developers",
+    role: "Owner",
+    company: "Rishita Developers",
+    logo: "/images/squareit/clients/client-rishita.jpg",
+  },
+  {
+    quote:
+      "One of the best digital marketing agency in Lucknow. The team is very professional and dedicated to the work. They have kept the charges very feasible for all.",
+    name: "Prithvee Realty Services",
+    role: "Owner",
+    company: "Prithvee Realty Services",
+    logo: "/images/squareit/clients/client-prithvee.jpg",
+  },
+  {
+    quote:
+      "Great Experience with Squareit (Digital Marketing Agency). Squareit took the initiative and truly cared about our company and the end results are great. Highly recommended for Website and SEO.",
+    name: "We Legal",
+    role: "Owner",
+    company: "We Legal",
+    logo: "/images/squareit/clients/client-we-legal.jpg",
   },
 ];
 
@@ -124,40 +176,179 @@ export const values: ValueItem[] = [
 export type TeamMember = {
   name: string;
   role: string;
-  bio: string;
+  bio?: string;
   image?: string;
+  /** Groups the grid into departments, in the order listed below. */
+  department: TeamDepartment;
+  /** Leads carry a bio and get the larger card treatment. */
+  lead?: boolean;
 };
 
+export type TeamDepartment =
+  | "Leadership"
+  | "Business Development"
+  | "Social Media"
+  | "Design & Video"
+  | "YouTube & Ads"
+  | "SEO"
+  | "Development";
+
+/** Rendered in this order on /about/team. */
+export const teamDepartments: TeamDepartment[] = [
+  "Leadership",
+  "Business Development",
+  "Social Media",
+  "Design & Video",
+  "YouTube & Ads",
+  "SEO",
+  "Development",
+];
+
+/** The team as listed on squareit.in/our-team, with their own photographs. */
 export const team: TeamMember[] = [
   {
-    name: "Sandeep Srivastava",
-    role: "Founder & Director",
-    bio: "Fifteen years building growth programmes for brands across healthcare, retail and education.",
+    name: "Sameer Khan",
+    role: "Founder & CEO",
+    bio: "An avid digital marketer with an impressive track record of success in campaigns for renowned brands across the globe. His innovative and results-driven approach has enabled Squareit Solutions to establish itself as a leader in the digital marketing space.",
+    image: "/images/squareit/team/team-sameer-khan.jpg",
+    department: "Leadership",
+    lead: true,
   },
   {
-    name: "Neha Agarwal",
-    role: "Head of Digital Strategy",
-    bio: "Turns business goals into channel plans that survive contact with a real budget.",
+    name: "Niyaz Ahmad Ansari",
+    role: "Manager",
+    bio: "An experienced professional, possessing a profound understanding of the digital marketing landscape. Highly skilled in SEO, content marketing, and analytics.",
+    image: "/images/squareit/team/team-niyaz-ahmad-ansari.jpg",
+    department: "Leadership",
+    lead: true,
   },
   {
-    name: "Ankit Sharma",
-    role: "Head of Technology",
-    bio: "Leads the engineering team building fast, search-friendly websites and portals.",
+    name: "Varisha Alam",
+    role: "HR Manager",
+    bio: "Oversees recruitment, employee relations, performance management, training and development, and labour law compliance.",
+    image: "/images/squareit/team/team-varisha-alam.jpg",
+    department: "Leadership",
+    lead: true,
+  },
+
+  {
+    name: "Ahmar Siddiqui",
+    role: "Business Development Manager",
+    image: "/images/squareit/team/team-ahmar-siddiqui.jpg",
+    department: "Business Development",
   },
   {
-    name: "Ritika Bose",
-    role: "Creative Director",
-    bio: "Builds identity systems and campaign creative that stay consistent everywhere.",
+    name: "Sidra Naushad",
+    role: "Business Development Executive",
+    image: "/images/squareit/team/team-sidra-naushad.jpg",
+    department: "Business Development",
+  },
+
+  {
+    name: "Shah Ashar Moiz",
+    role: "Social Media Manager",
+    image: "/images/squareit/team/team-shah-ashar-moiz.jpg",
+    department: "Social Media",
   },
   {
-    name: "Vikas Yadav",
-    role: "Performance Marketing Lead",
-    bio: "Runs paid search and paid social to a target cost per acquisition, every month.",
+    name: "Mehraj Rizvi",
+    role: "SMM Executive",
+    image: "/images/squareit/team/team-mehraj-rizvi.jpg",
+    department: "Social Media",
   },
   {
-    name: "Shreya Kapoor",
-    role: "Content & SEO Lead",
-    bio: "Editorial strategy, technical SEO and the content engine behind our organic results.",
+    name: "Parkhi Mishra",
+    role: "SMO Executive",
+    image: "/images/squareit/team/team-parkhi-mishra.jpg",
+    department: "Social Media",
+  },
+
+  {
+    name: "Anurag Yadav",
+    role: "Graphic Designer",
+    image: "/images/squareit/team/team-anurag-yadav.jpg",
+    department: "Design & Video",
+  },
+  {
+    name: "Ali Yusufi",
+    role: "Graphic Designer",
+    image: "/images/squareit/team/team-ali-yusufi.jpg",
+    department: "Design & Video",
+  },
+  {
+    name: "Anas Khan",
+    role: "Video Editor",
+    image: "/images/squareit/team/team-anas-khan.jpg",
+    department: "Design & Video",
+  },
+
+  {
+    name: "Faiz Khan",
+    role: "YouTube Monetization Expert",
+    image: "/images/squareit/team/team-faiz-khan.jpg",
+    department: "YouTube & Ads",
+  },
+  {
+    name: "Anjani Gupta",
+    role: "YouTube Monetization Expert",
+    image: "/images/squareit/team/team-anjani-gupta.jpg",
+    department: "YouTube & Ads",
+  },
+  {
+    name: "Karishma",
+    role: "YouTube Monetization Executive",
+    image: "/images/squareit/team/team-karishma.jpg",
+    department: "YouTube & Ads",
+  },
+  {
+    name: "Aqsa Aziz",
+    role: "YouTube Monetization Executive",
+    image: "/images/squareit/team/team-aqsa-aziz.jpg",
+    department: "YouTube & Ads",
+  },
+  {
+    name: "Arshi Khan",
+    role: "YouTube Monetization Executive",
+    image: "/images/squareit/team/team-arshi-khan.jpg",
+    department: "YouTube & Ads",
+  },
+  {
+    name: "Sohail Khan",
+    role: "Google Ads Executive",
+    image: "/images/squareit/team/team-sohail-khan.jpg",
+    department: "YouTube & Ads",
+  },
+
+  {
+    name: "Ahmad Jamal",
+    role: "SEO Specialist",
+    image: "/images/squareit/team/team-ahmad-jamal.jpg",
+    department: "SEO",
+  },
+  {
+    name: "Aquib Siddique",
+    role: "SEO Executive",
+    image: "/images/squareit/team/team-aquib-siddique.jpg",
+    department: "SEO",
+  },
+
+  {
+    name: "Mohammad Abdullah",
+    role: "AI Engineer & Web Developer",
+    image: "/images/squareit/team/team-mohammad-abdullah.jpg",
+    department: "Development",
+  },
+  {
+    name: "Utkarsh Singh",
+    role: "Web Developer",
+    image: "/images/squareit/team/team-utkarsh-singh.jpg",
+    department: "Development",
+  },
+  {
+    name: "Piyush Sing",
+    role: "Web Developer",
+    image: "/images/squareit/team/team-piyush-sing.jpg",
+    department: "Development",
   },
 ];
 

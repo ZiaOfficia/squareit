@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -8,9 +7,12 @@ import { TrustedBy } from "@/components/home/TrustedBy";
 import { Container, Section } from "@/components/ui/Section";
 import { ArrowBadge } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { projects } from "@/content/work";
 import { absoluteUrl } from "@/lib/site";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Portfolio — Websites, Campaigns & Brand Work",
@@ -49,6 +51,7 @@ export default function PortfolioPage() {
         }
         description="A selection of recent projects. Every one of them started with a business problem, not a design brief."
         crumbs={[{ name: "Portfolio", path: "/portfolio" }]}
+        accent="blue"
         note={
           <>
             Real
@@ -64,22 +67,18 @@ export default function PortfolioPage() {
 
       <Section tone="paper" padding="md">
         <Container>
-          <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger as="ul" className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <li key={project.slug}>
+              <StaggerItem as="li" key={project.slug}>
+                <TiltCard strength={4}>
                 <Link href={`/portfolio/${project.slug}`} className="group block">
-                  <div
-                    className="relative aspect-[4/3] overflow-hidden rounded-sm"
-                    style={{ backgroundColor: project.tone }}
-                  >
-                    <Image
-                      src={project.image}
-                      alt={`${project.client} — ${project.discipline} project`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                  </div>
+                  <ParallaxImage
+                    src={project.image}
+                    alt={`${project.client} — ${project.discipline} project`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
+                    className="aspect-[4/3] rounded-sm"
+                    background={project.tone}
+                  />
                   <div className="mt-4 flex items-start justify-between gap-4">
                     <div>
                       <h2 className="font-display text-[1.05rem] font-extrabold tracking-tight">
@@ -92,9 +91,10 @@ export default function PortfolioPage() {
                     <ArrowBadge tone="light" className="size-8" />
                   </div>
                 </Link>
-              </li>
+                </TiltCard>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 

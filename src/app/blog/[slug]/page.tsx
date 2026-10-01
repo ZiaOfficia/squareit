@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { CtaBand } from "@/components/home/CtaBand";
 import { PostBody } from "@/components/blog/PostBody";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { Container, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
@@ -172,18 +173,13 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             {related.map((item) => (
               <li key={item.slug}>
                 <Link href={`/blog/${item.slug}`} className="group block">
-                  <div
-                    className="relative aspect-[16/10] overflow-hidden rounded-sm"
-                    style={{ backgroundColor: item.tone }}
-                  >
-                    <Image
+                  <ParallaxImage
                       src={item.image}
                       alt={item.title}
-                      fill
                       sizes="(max-width: 640px) 100vw, 32vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="aspect-[16/10] rounded-sm"
+                      background={item.tone}
                     />
-                  </div>
                   <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-brand-green">
                     {item.categoryName}
                   </p>

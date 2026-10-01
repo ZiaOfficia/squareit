@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { breadcrumbSchema } from "@/lib/seo";
 
 export type LegalSection = {
@@ -28,6 +29,7 @@ export function LegalPage({ title, path, updated, intro, sections }: LegalPagePr
         title={title}
         description={intro}
         crumbs={[{ name: title, path }]}
+        accent="blue"
       >
         <p className="mt-6 text-xs uppercase tracking-[0.12em] text-muted">
           Last updated: {updated}
@@ -36,9 +38,9 @@ export function LegalPage({ title, path, updated, intro, sections }: LegalPagePr
 
       <Section tone="paper" padding="md">
         <Container>
-          <div className="mx-auto max-w-2xl space-y-10">
+          <Stagger className="mx-auto max-w-2xl space-y-10">
             {sections.map((section) => (
-              <section key={section.heading}>
+              <StaggerItem as="section" key={section.heading}>
                 <h2 className="font-display text-[1.3rem] font-extrabold tracking-tight">
                   {section.heading}
                 </h2>
@@ -59,9 +61,9 @@ export function LegalPage({ title, path, updated, intro, sections }: LegalPagePr
                     ))}
                   </ul>
                 ) : null}
-              </section>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </Section>
     </>

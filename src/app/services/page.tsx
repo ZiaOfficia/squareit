@@ -8,6 +8,7 @@ import { ArrowUpRight } from "@/components/ui/Icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema, serviceSchema } from "@/lib/seo";
 import { serviceCategories } from "@/content/services";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Digital Marketing, Development & Design Services",
@@ -56,6 +57,7 @@ export default function ServicesPage() {
         }
         description="Three practices, one team. Most clients start with a single service and grow into a combined programme once the first results land."
         crumbs={[{ name: "Services", path: "/services" }]}
+        accent="green"
         note={
           <>
             Strategy
@@ -70,7 +72,7 @@ export default function ServicesPage() {
       {/* Category cards */}
       <Section tone="ink" padding="md">
         <Container>
-          <div className="grid gap-4 md:grid-cols-3">
+          <Stagger className="grid gap-4 md:grid-cols-3">
             {serviceCategories.map((category) => (
               <Link
                 key={category.slug}
@@ -96,7 +98,7 @@ export default function ServicesPage() {
                 </p>
               </Link>
             ))}
-          </div>
+          </Stagger>
         </Container>
       </Section>
 
@@ -117,18 +119,18 @@ export default function ServicesPage() {
                 </Link>
               </div>
 
-              <ul className="grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:col-span-8">
+              <Stagger as="ul" className="grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:col-span-8">
                 {category.items.map((item) => (
-                  <li key={item.slug} className="border-t border-line pt-4">
+                  <StaggerItem as="li" key={item.slug} className="border-t border-line pt-4">
                     <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
                       {item.title}
                     </h3>
                     <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted">
                       {item.summary}
                     </p>
-                  </li>
+                  </StaggerItem>
                 ))}
-              </ul>
+              </Stagger>
             </div>
           </Container>
         </Section>

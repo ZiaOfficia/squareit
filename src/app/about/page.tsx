@@ -9,6 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { processSteps, values } from "@/content/company";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "About Squareit Solutions — Digital Growth Partner in Lucknow",
@@ -40,6 +41,7 @@ export default function AboutPage() {
         }
         description="Squareit Solutions started with a simple frustration: businesses were buying marketing activity instead of marketing outcomes. We built an agency around the opposite idea — strategy first, measurable results, and a team you can actually reach."
         crumbs={[{ name: "About", path: "/about" }]}
+        accent="forest"
         note={
           <>
             Strategy
@@ -103,16 +105,16 @@ export default function AboutPage() {
                 Four principles we do not negotiate on.
               </h2>
             </div>
-            <ul className="grid gap-px overflow-hidden rounded-sm bg-white/10 sm:grid-cols-2 lg:col-span-8">
+            <Stagger as="ul" className="grid gap-px overflow-hidden rounded-sm bg-white/10 sm:grid-cols-2 lg:col-span-8">
               {values.map((value) => (
-                <li key={value.title} className="bg-ink p-7">
+                <StaggerItem as="li" key={value.title} className="bg-ink p-7">
                   <h3 className="font-display text-[1.1rem] font-extrabold tracking-tight text-white">
                     {value.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-white/60">{value.description}</p>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
         </Container>
       </Section>
@@ -129,9 +131,9 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <ol className="grid gap-5 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
+            <Stagger as="ol" className="grid gap-5 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-4">
               {processSteps.map((step) => (
-                <li key={step.number} className="border-t-2 border-line pt-5">
+                <StaggerItem as="li" key={step.number} className="border-t-2 border-line pt-5">
                   <span
                     className={`inline-flex size-10 items-center justify-center rounded-full font-display text-[0.75rem] font-extrabold text-white ${
                       badgeTones[step.accent]
@@ -145,9 +147,9 @@ export default function AboutPage() {
                   <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">
                     {step.description}
                   </p>
-                </li>
+                </StaggerItem>
               ))}
-            </ol>
+            </Stagger>
           </div>
         </Container>
       </Section>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container, Eyebrow } from "@/components/ui/Section";
 import { ArrowRight } from "@/components/ui/Icons";
@@ -26,14 +27,29 @@ export function TrustedBy() {
               {clients.map((client) => (
                 <li
                   key={client.name}
-                  className="flex w-28 shrink-0 flex-col items-center gap-2 px-2 text-center sm:w-32"
+                  className="flex w-28 shrink-0 flex-col items-center gap-2.5 px-2 text-center sm:w-32"
                 >
-                  <span
-                    className="inline-flex size-9 items-center justify-center rounded-full border border-ink/15 font-display text-[0.7rem] font-extrabold text-ink"
-                    aria-hidden="true"
-                  >
-                    {client.mark}
-                  </span>
+                  {client.logo ? (
+                    /* Supplied logos vary in shape and ground colour, so each
+                       sits on a white chip and is contained rather than cropped. */
+                    <span className="flex h-12 w-24 items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-1.5">
+                      <Image
+                        src={client.logo}
+                        alt={client.name}
+                        width={96}
+                        height={48}
+                        sizes="96px"
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  ) : (
+                    <span
+                      className="inline-flex size-9 items-center justify-center rounded-full border border-ink/15 font-display text-[0.7rem] font-extrabold text-ink"
+                      aria-hidden="true"
+                    >
+                      {client.mark}
+                    </span>
+                  )}
                   <span className="text-[0.7rem] leading-tight text-muted">{client.name}</span>
                 </li>
               ))}

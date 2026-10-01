@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 import { Container, Eyebrow, Section } from "@/components/ui/Section";
 import { MailIcon, PhoneIcon, PinIcon } from "@/components/ui/Icons";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { breadcrumbSchema, buildMetadata, faqSchema } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 import { faqs } from "@/content/company";
@@ -44,6 +45,7 @@ export default function ContactPage() {
         }
         description="Tell us where your business is now and where you want it to be. We will come back with an honest view of what it takes to get there — no obligation."
         crumbs={[{ name: "Contact", path: "/contact" }]}
+        accent="blue"
         note={
           <>
             Free
@@ -57,17 +59,17 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             {/* Form */}
-            <div className="lg:col-span-7">
+            <Reveal className="lg:col-span-7">
               <Eyebrow>Send an Enquiry</Eyebrow>
               <h2 className="mt-4 text-display-md">Start a project.</h2>
               <div className="mt-8">
                 <ContactForm />
               </div>
-            </div>
+            </Reveal>
 
             {/* Details */}
             <aside className="lg:col-span-5">
-              <div className="rounded-sm border border-line bg-white p-7">
+              <Reveal delay={0.12} className="rounded-sm border border-line bg-white p-7">
                 <Eyebrow>Contact Details</Eyebrow>
 
                 <ul className="mt-6 space-y-6">
@@ -138,7 +140,7 @@ export default function ContactPage() {
                     Monday – Saturday · {hours.opens} – {hours.closes} IST
                   </p>
                 </div>
-              </div>
+              </Reveal>
             </aside>
           </div>
         </Container>
@@ -148,21 +150,21 @@ export default function ContactPage() {
       <Section tone="paper-alt" padding="md">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-4">
+            <Reveal className="lg:col-span-4">
               <Eyebrow>FAQs</Eyebrow>
               <h2 className="mt-4 text-display-md">Before you ask.</h2>
-            </div>
+            </Reveal>
             <div className="lg:col-span-8">
-              <dl className="divide-y divide-line border-y border-line">
+              <Stagger as="dl" className="divide-y divide-line border-y border-line">
                 {faqs.map((faq) => (
-                  <div key={faq.question} className="py-6">
+                  <StaggerItem key={faq.question} className="py-6">
                     <dt className="font-display text-[1.05rem] font-extrabold tracking-tight">
                       {faq.question}
                     </dt>
                     <dd className="mt-2.5 text-sm leading-relaxed text-muted">{faq.answer}</dd>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </dl>
+              </Stagger>
             </div>
           </div>
         </Container>

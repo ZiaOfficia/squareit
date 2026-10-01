@@ -23,7 +23,7 @@ export const projects: Project[] = [
     year: "2024",
     summary:
       "A dark, editorial portfolio site for a creative studio — built to make the work the hero and the enquiry form impossible to miss.",
-    image: "/images/work/studio-and-studio.png",
+    image: "/images/squareit/portfolio/portfolio-studio-and-studio.png",
     tone: "#F5DFD9",
     featured: true,
   },
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     year: "2024",
     summary:
       "Local SEO, Google Business Profile and paid search working together to keep a dental practice's appointment book full.",
-    image: "/images/work/aastha-dental.png",
+    image: "/images/squareit/portfolio/portfolio-aastha-dental.png",
     tone: "#DBE1EC",
     featured: true,
   },
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     year: "2023",
     summary:
       "Identity, packaging and collateral for a children's art brand — warm, tactile and built to scale across products.",
-    image: "/images/work/artchilds.png",
+    image: "/images/squareit/portfolio/portfolio-artchilds.png",
     tone: "#F9F1DA",
     featured: true,
   },
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2023",
     summary: "Campaign creative and social templates for a fine jewellery retailer.",
-    image: "/images/work/jewelsbox.png",
+    image: "/images/squareit/portfolio/portfolio-jewelsbox.jpg",
     tone: "#DDE0D9",
     featured: false,
   },
@@ -73,7 +73,7 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2023",
     summary: "Menu, in-store and social design for a growing QSR chain.",
-    image: "/images/work/pizza-dine.png",
+    image: "/images/squareit/portfolio/portfolio-pizza-dine.jpg",
     tone: "#F5DFD9",
     featured: false,
   },
@@ -85,7 +85,7 @@ export const projects: Project[] = [
     discipline: "Graphic Design",
     year: "2022",
     summary: "Brand and campaign design for a destination wedding planner.",
-    image: "/images/work/worldwide-wedding.png",
+    image: "/images/squareit/portfolio/portfolio-worldwide-wedding.jpg",
     tone: "#DBE8DB",
     featured: false,
   },
@@ -135,7 +135,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Map pack keywords", value: "42" },
       { label: "Cost per enquiry", value: "−54%" },
     ],
-    image: "/images/work/aastha-dental.png",
+    image: "/images/squareit/portfolio/portfolio-aastha-dental.png",
     tone: "#DBE1EC",
   },
   {
@@ -160,7 +160,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "LCP (mobile)", value: "1.4s" },
       { label: "Enquiries per month", value: "2.4×" },
     ],
-    image: "/images/work/studio-and-studio.png",
+    image: "/images/squareit/portfolio/portfolio-studio-and-studio.png",
     tone: "#F5DFD9",
   },
   {
@@ -185,7 +185,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "Return customers", value: "31%" },
       { label: "Social reach", value: "1.2M" },
     ],
-    image: "/images/work/artchilds.png",
+    image: "/images/squareit/portfolio/portfolio-artchilds.png",
     tone: "#F9F1DA",
   },
 ];
@@ -196,17 +196,26 @@ export function getCaseStudy(slug: string): CaseStudy | undefined {
 
 export type Client = {
   name: string;
-  /** Two-to-three character wordmark stand-in until real logos are supplied. */
+  /** Initials fallback, used when no logo artwork exists. */
   mark: string;
+  /** Logo as published on squareit.in. */
+  logo?: string;
 };
 
+/**
+ * The client roster from squareit.in's "Our Valuable Clients" section, with the
+ * logos published there. `mark` stays as the initials fallback for anything
+ * without artwork.
+ */
 export const clients: Client[] = [
-  { name: "Aastha Dental", mark: "AD" },
-  { name: "Studio & Studio", mark: "SS" },
-  { name: "Artchilds", mark: "A" },
-  { name: "SS Coaching", mark: "SS" },
-  { name: "Kanhaiya Group", mark: "K" },
-  { name: "Parog", mark: "P" },
-  { name: "GreenLeaf", mark: "G" },
-  { name: "UrbanNest", mark: "U" },
+  { name: "SS Coaching", mark: "SS", logo: "/images/squareit/clients/client-ss-coaching.jpg" },
+  { name: "Sahu Developers", mark: "SD", logo: "/images/squareit/clients/client-sahu-developers.jpg" },
+  { name: "Helping Hands", mark: "HH", logo: "/images/squareit/clients/client-helping-hands.jpg" },
+  { name: "JewelsBox", mark: "JB", logo: "/images/squareit/clients/client-jewelsbox.jpg" },
+  { name: "AJ Sons", mark: "AJ", logo: "/images/squareit/clients/client-aj-sons.jpg" },
+  { name: "Xoheb Khan", mark: "XK", logo: "/images/squareit/clients/client-xoheb-khan.jpg" },
+  { name: "Pizza Dine", mark: "PD", logo: "/images/squareit/clients/client-pizza-dine.jpg" },
+  { name: "Rishita Developers", mark: "RD", logo: "/images/squareit/clients/client-rishita.jpg" },
+  { name: "Prithvee Realty", mark: "PR", logo: "/images/squareit/clients/client-prithvee.jpg" },
+  { name: "We Legal", mark: "WL", logo: "/images/squareit/clients/client-we-legal.jpg" },
 ];

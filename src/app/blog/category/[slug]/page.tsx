@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { getPostsByCategory, postCategories } from "@/content/blog";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 type Params = { slug: string };
 
@@ -96,30 +97,25 @@ export default async function BlogCategoryPage({ params }: { params: Promise<Par
               .
             </p>
           ) : (
-            <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <Stagger as="ul" className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {categoryPosts.map((post) => (
-                <li key={post.slug}>
+                <StaggerItem as="li" key={post.slug}>
                   <Link href={`/blog/${post.slug}`} className="group block">
-                    <div
-                      className="relative aspect-[16/10] overflow-hidden rounded-sm"
-                      style={{ backgroundColor: post.tone }}
-                    >
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 32vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </div>
+                    <ParallaxImage
+                      src={post.image}
+                      alt={post.title}
+                      sizes="(max-width: 640px) 100vw, 32vw"
+                      className="aspect-[16/10] rounded-sm"
+                      background={post.tone}
+                    />
                     <h2 className="mt-4 font-display text-[1.05rem] font-extrabold leading-snug tracking-tight">
                       {post.title}
                     </h2>
                     <p className="mt-2 text-sm leading-relaxed text-muted">{post.excerpt}</p>
                   </Link>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           )}
         </Container>
       </Section>

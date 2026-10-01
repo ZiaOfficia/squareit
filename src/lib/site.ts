@@ -8,12 +8,12 @@ export const siteConfig = {
   name: "Squareit Solutions",
   legalName: "Squareit Solutions",
   shortName: "Squareit",
-  tagline: "Digital Growth Simplified",
+  tagline: "An Exclusive Digital Marketing Agency",
   // Staging deploys set NEXT_PUBLIC_SITE_URL so canonicals never point at prod.
   // `||` (not `??`) so an empty env var still falls back instead of crashing `new URL("")`.
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://squareit.in").replace(/\/+$/, ""),
   locale: "en_IN",
-  foundingDate: "2016",
+  foundingDate: "2013",
 
   title: "Squareit Solutions — Digital Marketing Company in Lucknow",
   description:
@@ -30,10 +30,10 @@ export const siteConfig = {
   ],
 
   contact: {
-    phonePrimary: "+91 9335 123 456",
-    phonePrimaryHref: "+919335123456",
-    phoneSecondary: "+91 78008 54321",
-    phoneSecondaryHref: "+917800854321",
+    phonePrimary: "+91 78008 54321",
+    phonePrimaryHref: "+917800854321",
+    phoneSecondary: "+91 95111 13586",
+    phoneSecondaryHref: "+919511113586",
     email: "info@squareit.in",
     salesEmail: "sales@squareit.in",
     careersEmail: "careers@squareit.in",

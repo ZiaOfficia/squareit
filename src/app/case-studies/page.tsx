@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { caseStudies } from "@/content/work";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Case Studies — Measurable Digital Growth",
@@ -32,29 +33,25 @@ export default function CaseStudiesPage() {
         }
         description="Every case study below reports the metric the client cared about at kickoff — not the metric that happened to look best afterwards."
         crumbs={[{ name: "Case Studies", path: "/case-studies" }]}
+        accent="yellow"
       />
 
       <Section tone="paper" padding="md">
         <Container>
-          <ul className="space-y-6">
+          <Stagger as="ul" className="space-y-6">
             {caseStudies.map((study) => (
-              <li key={study.slug}>
+              <StaggerItem as="li" key={study.slug}>
                 <Link
                   href={`/case-studies/${study.slug}`}
                   className="group grid gap-6 rounded-sm border border-line bg-white p-5 transition-colors hover:border-ink md:grid-cols-12 md:p-6"
                 >
-                  <div
-                    className="relative aspect-[4/3] overflow-hidden rounded-sm md:col-span-4 md:aspect-[4/3]"
-                    style={{ backgroundColor: study.tone }}
-                  >
-                    <Image
+                  <ParallaxImage
                       src={study.image}
                       alt={`${study.client} case study`}
-                      fill
                       sizes="(max-width: 768px) 100vw, 30vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="aspect-[4/3] md:col-span-4 md:aspect-[4/3] rounded-sm"
+                      background={study.tone}
                     />
-                  </div>
 
                   <div className="flex flex-col md:col-span-8">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted">
@@ -84,9 +81,9 @@ export default function CaseStudiesPage() {
                     </dl>
                   </div>
                 </Link>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 

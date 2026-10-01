@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/seo";
 import { getServiceCategory, serviceCategories } from "@/content/services";
 import { faqs, processSteps } from "@/content/company";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 type Params = { slug: string };
 
@@ -81,6 +82,7 @@ export default async function ServiceDetailPage({
       />
 
       <PageHeader
+        accent="green"
         eyebrow={`${category.number} — Services`}
         title={
           <>
@@ -134,16 +136,16 @@ export default async function ServiceDetailPage({
               </p>
             </div>
 
-            <ul className="grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:col-span-8">
+            <Stagger as="ul" className="grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:col-span-8">
               {category.items.map((item) => (
-                <li key={item.slug} className="rounded-sm border border-line bg-white p-5">
+                <StaggerItem as="li" key={item.slug} className="rounded-sm border border-line bg-white p-5">
                   <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">{item.summary}</p>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
         </Container>
       </Section>
@@ -153,9 +155,9 @@ export default async function ServiceDetailPage({
         <Container>
           <Eyebrow>How the engagement runs</Eyebrow>
           <h2 className="mt-4 max-w-xl text-display-md">Four stages, every time.</h2>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger as="ol" className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step) => (
-              <li key={step.number} className="border-t-2 border-ink/15 pt-5">
+              <StaggerItem as="li" key={step.number} className="border-t-2 border-ink/15 pt-5">
                 <span className="font-display text-sm font-extrabold text-muted">{step.number}</span>
                 <h3 className="mt-3 font-display text-[1.05rem] font-extrabold tracking-tight">
                   {step.title}
@@ -163,9 +165,9 @@ export default async function ServiceDetailPage({
                 <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">
                   {step.description}
                 </p>
-              </li>
+              </StaggerItem>
             ))}
-          </ol>
+          </Stagger>
         </Container>
       </Section>
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { animate, useInView, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+
+import { EASE, gsap, prefersReducedMotion, useGSAP } from "./gsap";
 
 /**
  * Counts a stat up to its value the first time it scrolls into view.
@@ -13,43 +14,51 @@ import { animate, useInView, useReducedMotion } from "motion/react";
  */
 export function CountUp({ value, className = "" }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
-  const still = useReducedMotion();
 
-  const digits = value.replace(/[^\d]/g, "");
-  const target = Number(digits);
-  const prefix = value.slice(0, value.indexOf(digits[0] ?? ""));
-  const suffix = value.slice(value.lastIndexOf(digits.at(-1) ?? "") + 1);
-  /** Thousands separators only if the source had them. */
-  const grouped = value.includes(",");
+  useGSAP(
+    () => {
+      const node = ref.current;
+      if (!node || prefersReducedMotion()) return;
 
-  const [display, setDisplay] = useState(value);
+      const digits = value.replace(/[^\d]/g, "");
+      const target = Number(digits);
+      if (!digits || !Number.isFinite(target) || target === 0) return;
 
-  // Drop to zero once on the client, before the stat is ever on screen, so the
-  // count doesn't visibly snap backwards when it starts.
-  useEffect(() => {
-    if (still || !Number.isFinite(target) || target === 0) return;
-    setDisplay(prefix + "0" + suffix);
-  }, [still, target, prefix, suffix]);
+      const prefix = value.slice(0, value.indexOf(digits[0]));
+      const suffix = value.slice(value.lastIndexOf(digits.at(-1) ?? "") + 1);
+      /** Thousands separators only if the source had them. */
+      const grouped = value.includes(",");
 
-  useEffect(() => {
-    if (!inView || still || !Number.isFinite(target) || target === 0) return;
+      const format = (count: number) =>
+        prefix + (grouped ? count.toLocaleString("en-US") : String(count)) + suffix;
 
-    const controls = animate(0, target, {
-      duration: 1.4,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => {
-        const rounded = Math.round(latest);
-        setDisplay(prefix + (grouped ? rounded.toLocaleString("en-US") : String(rounded)) + suffix);
-      },
-    });
+      // Dropped to zero before the first paint, well before the stat is on
+      // screen, so the count doesn't visibly snap backwards when it starts.
+      // Written straight to the node: React only ever renders `value` here, so
+      // there is nothing for it to reconcile against and no re-render per tick.
+      const counter = { count: 0 };
+      node.textContent = format(0);
 
-    return () => controls.stop();
-  }, [inView, still, target, prefix, suffix, grouped]);
+      gsap.to(counter, {
+        count: target,
+        duration: 1.4,
+        ease: EASE,
+        onUpdate: () => {
+          node.textContent = format(Math.round(counter.count));
+        },
+        scrollTrigger: { trigger: node, start: "top 85%", once: true },
+      });
+
+      return () => {
+        node.textContent = value;
+      };
+    },
+    { dependencies: [value], scope: ref, revertOnUpdate: true },
+  );
 
   return (
     <span ref={ref} className={className}>
-      {display}
+      {value}
     </span>
   );
 }

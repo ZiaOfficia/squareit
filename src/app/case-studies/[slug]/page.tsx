@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Eyebrow, Section } from "@/components/ui/Section";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { caseStudies, getCaseStudy } from "@/content/work";
 import { absoluteUrl } from "@/lib/site";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 type Params = { slug: string };
 
@@ -75,6 +76,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       />
 
       <PageHeader
+        accent="yellow"
         eyebrow={`${study.industry} · ${study.service}`}
         title={study.title}
         description={study.summary}
@@ -104,18 +106,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-4">
-              <div
-                className="relative aspect-[4/3] overflow-hidden rounded-sm"
-                style={{ backgroundColor: study.tone }}
-              >
-                <Image
-                  src={study.image}
-                  alt={`${study.client} case study`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
+              <ParallaxImage
+                      src={study.image}
+                      alt={`${study.client} case study`}
+                      sizes="(max-width: 1024px) 100vw, 30vw"
+                      className="aspect-[4/3] rounded-sm"
+                      background={study.tone}
+                    />
               <dl className="mt-6 space-y-4 border-t border-line pt-6">
                 {[
                   { label: "Client", value: study.client },
@@ -136,16 +133,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               <p className="mt-4 text-[0.95rem] leading-relaxed text-ink-soft">{study.challenge}</p>
 
               <Eyebrow className="mt-12">Our Approach</Eyebrow>
-              <ol className="mt-5 space-y-5">
+              <Stagger as="ol" className="mt-5 space-y-5">
                 {study.approach.map((step, index) => (
-                  <li key={step} className="flex gap-4 border-t border-line pt-5">
+                  <StaggerItem as="li" key={step} className="flex gap-4 border-t border-line pt-5">
                     <span className="font-display text-sm font-extrabold text-brand-blue">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <p className="text-[0.95rem] leading-relaxed text-ink-soft">{step}</p>
-                  </li>
+                  </StaggerItem>
                 ))}
-              </ol>
+              </Stagger>
 
               <Eyebrow className="mt-12">The Result</Eyebrow>
               <p className="mt-4 text-[0.95rem] leading-relaxed text-ink-soft">
@@ -164,9 +161,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       <Section tone="paper-alt" padding="sm">
         <Container>
           <p className="eyebrow">More Case Studies</p>
-          <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+          <Stagger as="ul" className="mt-5 grid gap-4 sm:grid-cols-2">
             {more.map((item) => (
-              <li key={item.slug}>
+              <StaggerItem as="li" key={item.slug}>
                 <Link
                   href={`/case-studies/${item.slug}`}
                   className="block rounded-sm border border-line bg-white p-6 transition-colors hover:border-ink"
@@ -178,9 +175,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                     {item.title}
                   </h2>
                 </Link>
-              </li>
+              </StaggerItem>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
