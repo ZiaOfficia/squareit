@@ -32,10 +32,8 @@ function MarkRing({ quadrant, index }: { quadrant: LogoQuadrant; index: number }
 
     const geo = new ExtrudeGeometry(shape, {
       depth: DEPTH,
-      bevelEnabled: true,
-      bevelThickness: 0.018,
-      bevelSize: 0.018,
-      bevelSegments: 2,
+      // No bevel: the logo's corners are sharp.
+      bevelEnabled: false,
       curveSegments: 1,
     });
 
@@ -110,7 +108,7 @@ export default function HeroMarkScene() {
     >
       {/* Budgeted so a front face lands at ~1.0 total irradiance: the faces
           pointing at the viewer read as the logo's flat colour, and only the
-          extruded sides and bevels fall into shadow. */}
+          extruded sides fall into shadow. */}
       <ambientLight intensity={0.45} />
       <directionalLight position={[3, 5, 7]} intensity={0.6} color="#fffdf7" />
       <directionalLight position={[-5, 2, 3]} intensity={0.2} color="#e8efff" />

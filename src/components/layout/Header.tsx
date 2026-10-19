@@ -60,7 +60,7 @@ export function Header() {
       </a>
 
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-3 sm:gap-6">
-        <Logo />
+        <Logo variant="image" />
 
         {/* Desktop navigation */}
         <nav aria-label="Main" className="hidden items-center gap-1 xl:flex">

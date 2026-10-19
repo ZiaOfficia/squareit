@@ -1,5 +1,5 @@
 import { ButtonLink } from "@/components/ui/Button";
-import { Container, HandNote } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Section";
 import { ArrowUpRight, PlayIcon } from "@/components/ui/Icons";
 import { HeroBackdrop } from "@/components/home/hero/HeroBackdrop";
 import { HeroMark } from "@/components/home/hero/HeroMark";
@@ -131,25 +131,6 @@ export function Hero() {
 
           {/* ---------- Collage column ---------- */}
           <div className="relative lg:col-span-5">
-            {/* Handwritten note, left of the collage on desktop */}
-            <div className="pointer-events-none absolute -left-2 top-6 z-10 hidden w-36 -rotate-6 text-ink xl:block">
-              <HandNote className="text-[1.45rem]">
-                Traditional
-                <br />
-                is gone.
-                <br />
-                Digital is in.
-              </HandNote>
-              <svg viewBox="0 0 140 14" className="mt-1 h-3 w-32 text-brand-red" fill="none" aria-hidden="true">
-                <path
-                  d="M3 10c26-6 54-8 86-6.5 17 .8 32 2.8 48 5"
-                  stroke="currentColor"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-
             <HeroCollage />
 
             {/* Floating results card */}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { siteConfig } from "@/lib/site";
@@ -8,9 +9,30 @@ type LogoProps = {
   className?: string;
   /** Render without the wrapping link (for use inside another link). */
   asStatic?: boolean;
+  /** "lockup" draws the mark and wordmark in code; "image" uses the artwork file. */
+  variant?: "lockup" | "image";
 };
 
-function LogoContent({ tone = "dark" }: { tone?: "dark" | "light" }) {
+function LogoContent({
+  tone = "dark",
+  variant = "lockup",
+}: {
+  tone?: "dark" | "light";
+  variant?: "lockup" | "image";
+}) {
+  if (variant === "image") {
+    return (
+      <Image
+        src="/images/logo1.png"
+        alt={siteConfig.name}
+        width={325}
+        height={110}
+        priority
+        className="h-11 w-auto"
+      />
+    );
+  }
+
   return (
     <span className="flex items-center gap-2.5">
       {/* The mark is wider than it is tall, so height drives the sizing. */}
@@ -35,11 +57,16 @@ function LogoContent({ tone = "dark" }: { tone?: "dark" | "light" }) {
   );
 }
 
-export function Logo({ tone = "dark", className = "", asStatic = false }: LogoProps) {
+export function Logo({
+  tone = "dark",
+  className = "",
+  asStatic = false,
+  variant = "lockup",
+}: LogoProps) {
   if (asStatic) {
     return (
       <span className={className}>
-        <LogoContent tone={tone} />
+        <LogoContent tone={tone} variant={variant} />
       </span>
     );
   }
@@ -50,7 +77,7 @@ export function Logo({ tone = "dark", className = "", asStatic = false }: LogoPr
       aria-label={`${siteConfig.name} — home`}
       className={`inline-flex shrink-0 ${className}`}
     >
-      <LogoContent tone={tone} />
+      <LogoContent tone={tone} variant={variant} />
     </Link>
   );
 }

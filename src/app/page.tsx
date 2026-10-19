@@ -4,6 +4,7 @@ import { Hero } from "@/components/home/Hero";
 import { StatsBar } from "@/components/home/StatsBar";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
+import { ProfileDownload } from "@/components/home/ProfileDownload";
 import { TestimonialSlider } from "@/components/home/TestimonialSlider";
 import { ProcessSplit } from "@/components/home/ProcessPanel";
 import { InsightsSection } from "@/components/home/InsightsSection";
@@ -37,6 +38,7 @@ export default function HomePage() {
       <StatsBar />
       <ServicesSection />
       <FeaturedWork />
+      <ProfileDownload />
       <ProcessSplit left={<TestimonialSlider />} />
       <InsightsSection />
       <FaqSection count={HOME_FAQ_COUNT} />

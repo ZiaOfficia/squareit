@@ -2,7 +2,6 @@
 
 import { useMemo, useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
-import { RoundedBox } from "@react-three/drei";
 import { Vector3, type BufferGeometry, type Group, type Mesh, type Points } from "three";
 
 import { gsap, useGSAP } from "@/components/motion/gsap";
@@ -73,14 +72,9 @@ export function BrandTile({ tile }: { tile: Tile }) {
   });
 
   return (
-    <RoundedBox
-      ref={ref}
-      args={[tile.size, tile.size, tile.size * 0.17]}
-      radius={tile.size * 0.07}
-      smoothness={3}
-      position={tile.position}
-      rotation={tile.rotation}
-    >
+    <mesh ref={ref} position={tile.position} rotation={tile.rotation}>
+      {/* Square-cornered, like the logo's tiles. */}
+      <boxGeometry args={[tile.size, tile.size, tile.size * 0.17]} />
       <meshStandardMaterial
         color={tile.color}
         roughness={0.45}
@@ -88,7 +82,7 @@ export function BrandTile({ tile }: { tile: Tile }) {
         transparent
         opacity={tile.opacity}
       />
-    </RoundedBox>
+    </mesh>
   );
 }
 
