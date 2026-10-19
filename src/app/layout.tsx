@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Caveat, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 
@@ -9,23 +9,25 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-const archivo = Archivo({
-  subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
+/* Self-hosted (latin, variable weight) so builds never depend on reaching
+   Google Fonts — a failed fetch there was breaking Vercel deploys. */
+const archivo = localFont({
+  src: "./fonts/archivo-latin.woff2",
+  weight: "600 900",
   variable: "--font-archivo",
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const jakarta = localFont({
+  src: "./fonts/plus-jakarta-sans-latin.woff2",
+  weight: "400 700",
   variable: "--font-jakarta",
   display: "swap",
 });
 
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+const caveat = localFont({
+  src: "./fonts/caveat-latin.woff2",
+  weight: "500 700",
   variable: "--font-caveat",
   display: "swap",
 });
