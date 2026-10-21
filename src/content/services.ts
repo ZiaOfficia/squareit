@@ -116,3 +116,12 @@ export function getServiceCategory(slug: string): ServiceCategory | undefined {
 export const allServiceItems = serviceCategories.flatMap((category) =>
   category.items.map((item) => ({ ...item, category: category.slug, categoryTitle: category.title })),
 );
+
+export function getServiceItem(
+  categorySlug: string,
+  itemSlug: string,
+): { category: ServiceCategory; item: ServiceItem } | undefined {
+  const category = getServiceCategory(categorySlug);
+  const item = category?.items.find((entry) => entry.slug === itemSlug);
+  return category && item ? { category, item } : undefined;
+}

@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Container, Eyebrow, Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
-import { CheckIcon } from "@/components/ui/Icons";
+import { ArrowRight, CheckIcon } from "@/components/ui/Icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/seo";
 import { getServiceCategory, serviceCategories } from "@/content/services";
@@ -138,11 +138,20 @@ export default async function ServiceDetailPage({
 
             <Stagger as="ul" className="grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:col-span-8">
               {category.items.map((item) => (
-                <StaggerItem as="li" key={item.slug} className="rounded-sm border border-line bg-white p-5">
-                  <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">{item.summary}</p>
+                <StaggerItem as="li" key={item.slug}>
+                  <Link
+                    href={`/services/${category.slug}/${item.slug}`}
+                    className="group flex h-full flex-col rounded-sm border border-line bg-white p-5 transition-colors hover:border-ink"
+                  >
+                    <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted">{item.summary}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[0.8125rem] font-semibold">
+                      Learn more
+                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
                 </StaggerItem>
               ))}
             </Stagger>

@@ -122,12 +122,14 @@ export default function ServicesPage() {
               <Stagger as="ul" className="grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:col-span-8">
                 {category.items.map((item) => (
                   <StaggerItem as="li" key={item.slug} className="border-t border-line pt-4">
-                    <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted">
-                      {item.summary}
-                    </p>
+                    <Link href={`/services/${category.slug}/${item.slug}`} className="group block">
+                      <h3 className="font-display text-[0.95rem] font-extrabold tracking-tight group-hover:underline">
+                        {item.title} →
+                      </h3>
+                      <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted">
+                        {item.summary}
+                      </p>
+                    </Link>
                   </StaggerItem>
                 ))}
               </Stagger>

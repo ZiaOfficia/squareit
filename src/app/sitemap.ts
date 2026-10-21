@@ -36,6 +36,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
+  const serviceItemRoutes: MetadataRoute.Sitemap = serviceCategories.flatMap((category) =>
+    category.items.map((item) => ({
+      url: absoluteUrl(`/services/${category.slug}/${item.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
+  );
+
   const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
     url: absoluteUrl(`/portfolio/${project.slug}`),
     lastModified: now,
@@ -74,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...serviceRoutes,
+    ...serviceItemRoutes,
     ...projectRoutes,
     ...caseStudyRoutes,
     ...postRoutes,
